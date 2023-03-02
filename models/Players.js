@@ -15,5 +15,7 @@ const PlayersSchema = new mongoose.Schema({
   },
 });
 
-const Players = mongoose.model("Players", PlayersSchema);
-module.exports = Players;
+// const Players = mongoose.model("Players", PlayersSchema);
+// module.exports = Players;
+
+module.exports = mongoose.model("Players", PlayersSchema);
