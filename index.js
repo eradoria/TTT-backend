@@ -25,8 +25,14 @@ mongoose.connect(
   }
 );
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+app.get("/insert", async (req, res) => {
+  PlayersModel.find({}, (err, result) => {
+    if (err) {
+      res.send(err);
+    }
+
+    res.send(result);
+  });
 });
 
 app.post("/insert", async (req, res) => {
