@@ -36,11 +36,10 @@ app.get("/insert", async (req, res) => {
 });
 
 app.post("/insert", async (req, res) => {
-  const id = req.body.id;
   const player = req.body.player;
   const rank = req.body.rank;
 
-  const newplayer = new PlayersModel({ id: id, player: player, rank: rank });
+  const newplayer = new PlayersModel({ player: player, rank: rank });
 
   try {
     await newplayer.save();
@@ -48,6 +47,28 @@ app.post("/insert", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+app.put("/update", async (req, res) => {
+  const id = req.body.id;
+  const newRank = req.body.newRank;
+
+  try {
+    await PlayersModel.findById(id, (err, updateRank) => {
+      updateRank.rank = newRank;
+      updateRank.save();
+      res.send("update");
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.delete("/delete/:id", async (req, res) => {
+  const id = req.params.id;
+
+  await PlayersModel.findByIdAndRemove(id).exec();
+  res.send("deleted");
 });
 
 app.listen(3001, () => {
