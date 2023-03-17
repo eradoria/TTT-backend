@@ -3,10 +3,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const axios = require("axios");
+require("dotenv").config();
 
 const db = mongoose.connection;
 const app = express();
-const apiPort = 3001;
+
+const { USER, PASSWORD, PORT } = process.env;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
