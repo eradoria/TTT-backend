@@ -21,13 +21,13 @@ const PlayersModel = require("./models/Players");
 app.use(express.json());
 
 mongoose.connect(
-  "mongodb+srv://admin:Password2@cluster0.9id8wxc.mongodb.net/TTT?retryWrites=true&w=majority",
+  "mongodb+srv://admin:Password2@cluster0.9id8wxc.mongodb.net/TTT",
   {
     useNewUrlParser: true,
   }
 );
 
-app.get("/insert", async (req, res) => {
+app.get("/rankings", async (req, res) => {
   PlayersModel.find({}, (err, result) => {
     if (err) {
       res.send(err);
