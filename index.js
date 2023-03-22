@@ -27,6 +27,11 @@ mongoose.connect(
   }
 );
 
+app.get("/", (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
+  res.send("Welcome to our server!");
+});
+
 app.get("/rankings", async (req, res) => {
   PlayersModel.find({}, (err, result) => {
     if (err) {
