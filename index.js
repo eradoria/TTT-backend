@@ -77,6 +77,21 @@ app.put("/update", async (req, res) => {
   }
 });
 
+app.put("/remove", async (req, res) => {
+  const id = req.body.id;
+  const newStatus = req.body.newStatus;
+
+  try {
+    await PlayersModel.findById(id, (err, updateStatus) => {
+      updateStatus.status = newStatus;
+      updateStatus.save();
+      res.send("removed");
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
 
