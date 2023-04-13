@@ -77,18 +77,38 @@ app.put("/update", async (req, res) => {
   }
 });
 
+// app.put("/remove", async (req, res) => {
+//   const id = req.body.id;
+//   const newStatus = req.body.newStatus;
+//   console.log(id);
+//   console.log(newStatus);
+//   try {
+//     await PlayersModel.findById(id, (err, updateStatus) => {
+//       updateStatus.status = newStatus;
+//       updateStatus.save();
+//       res.send("removed");
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
+
 app.put("/remove", async (req, res) => {
   const id = req.body.id;
   const newStatus = req.body.newStatus;
-
+  console.log(id);
+  console.log(newStatus);
   try {
-    await PlayersModel.findById(id, (err, updateStatus) => {
-      updateStatus.status = newStatus;
-      updateStatus.save();
-      res.send("removed");
-    });
+    const player = await PlayersModel.findById(id);
+    if (!player) {
+      return res.status(404).send("Player not found");
+    }
+    player.status = newStatus;
+    await player.updateOne();
+    res.send("removed");
   } catch (err) {
     console.log(err);
+    res.status(500).send("Server Error");
   }
 });
 

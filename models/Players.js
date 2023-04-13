@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const PlayersSchema = new mongoose.Schema({
-  // id: {
-  //   type: String,
-  //   required: true,
-  // },
   player: {
     type: String,
     required: true,
@@ -12,6 +8,15 @@ const PlayersSchema = new mongoose.Schema({
   rank: {
     type: String,
     required: true,
+  },
+  status: {
+    type: String,
+  },
+  win: {
+    type: String,
+  },
+  loss: {
+    type: String,
   },
 });
 
