@@ -76,8 +76,23 @@ app.put("/update", async (req, res) => {
     console.log(err);
   }
 });
+app.put("/readd", async (req, res) => {
+  const id = req.body.id;
+  const newRank = req.body.newRank;
+  const status = req.body.status;
 
-app.put("/remove/", async (req, res) => {
+  try {
+    await PlayersModel.findById(id, (err, updateStatus) => {
+      updateStatus.status = status;
+      updateStatus.save();
+      res.send("player added to rankings");
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.put("/remove", async (req, res) => {
   const id = req.body.id;
   const newStatus = req.body.newStatus;
   console.log(id);
