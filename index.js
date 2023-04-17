@@ -76,17 +76,18 @@ app.put("/update", async (req, res) => {
     console.log(err);
   }
 });
+
 app.put("/readd", async (req, res) => {
   const id = req.body.id;
   const newRank = req.body.newRank;
-  const status = req.body.status;
+  const newStatus = req.body.newStatus;
 
   try {
-    await PlayersModel.findById(id, (err, updateStatus) => {
-      updateStatus.status = status;
-      updateStatus.save();
-      res.send("player added to rankings");
+    await PlayersModel.findByIdAndUpdate(id, {
+      rank: newRank,
+      status: newStatus,
     });
+    res.send("readd");
   } catch (err) {
     console.log(err);
   }
