@@ -80,12 +80,12 @@ app.put("/update", async (req, res) => {
 app.put("/readd", async (req, res) => {
   const id = req.body.id;
   const newRank = req.body.newRank;
-  const newStatus = req.body.newStatus;
+  const status = req.body.status;
 
   try {
     await PlayersModel.findByIdAndUpdate(id, {
       rank: newRank,
-      status: newStatus,
+      status: status,
     });
     res.send("readd");
   } catch (err) {
