@@ -78,7 +78,7 @@ app.put("/update", async (req, res) => {
 });
 
 app.put("/readd", async (req, res) => {
-  console.log(req.body); // Add this line to see if the request body is being received correctly
+  console.log(req.body); // the request body is being received correctly
   const id = req.body.id;
   const newRank = req.body.newRank;
   const status = req.body.status;
@@ -89,13 +89,14 @@ app.put("/readd", async (req, res) => {
       status: status,
     });
     res.send("readd");
+    console.log("player added back to rankings");
   } catch (err) {
     console.log(err);
   }
 });
 
 app.put("/remove", async (req, res) => {
-  console.log(req.body); // Add this line to see if the request body is being received correctly
+  console.log(req.body); //  request body is being received correctly
   const id = req.body.id;
   const newStatus = req.body.newStatus;
   console.log(id);
@@ -105,6 +106,7 @@ app.put("/remove", async (req, res) => {
       updateStatus.status = newStatus;
       updateStatus.save();
       res.send("removed");
+      console.log("player removed from rankings");
     });
   } catch (err) {
     console.log(err);
