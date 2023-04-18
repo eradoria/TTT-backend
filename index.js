@@ -51,8 +51,17 @@ app.get("/rankings", async (req, res) => {
 app.post("/insert", async (req, res) => {
   const player = req.body.player;
   const rank = req.body.rank;
+  const status = req.body.status;
+  const win = req.body.win;
+  const loss = req.body.loss;
 
-  const newplayer = new PlayersModel({ player: player, rank: rank });
+  const newplayer = new PlayersModel({
+    player: player,
+    rank: rank,
+    status: status,
+    win: win,
+    loss: loss,
+  });
 
   try {
     await newplayer.save();
