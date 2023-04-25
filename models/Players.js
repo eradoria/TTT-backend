@@ -11,12 +11,15 @@ const PlayersSchema = new mongoose.Schema({
   },
   status: {
     type: String,
+    required: true,
   },
   win: {
     type: String,
+    required: true,
   },
   loss: {
     type: String,
+    required: true,
   },
 });
 

@@ -49,6 +49,7 @@ app.get("/rankings", async (req, res) => {
 });
 
 app.post("/insert", async (req, res) => {
+  console.log(req.body); // the request body is being received correctly
   const player = req.body.player;
   const rank = req.body.rank;
   const status = req.body.status;
@@ -64,6 +65,7 @@ app.post("/insert", async (req, res) => {
   });
 
   try {
+    console.log(newplayer); // the request body is being received correctly
     await newplayer.save();
     res.send("inserted data");
   } catch (err) {
