@@ -121,6 +121,24 @@ app.put("/remove", async (req, res) => {
   }
 });
 
+app.put("/updateRecord", async (req, res) => {
+  const id = req.body.id;
+  const win = req.body.win;
+  const loss = req.body.loss;
+
+  try {
+    await PlayersModel.findById(id, (err, updateRecord) => {
+      const totalWins = wins.reduce((acc, curr) => acc + curr, 0);
+      updateRecord.win = updateRecord.win + totalWins;
+      updateRecord.save();
+      res.send("Record updated");
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal server error");
+  }
+});
+
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
 
