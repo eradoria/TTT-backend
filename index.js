@@ -107,8 +107,6 @@ app.put("/remove", async (req, res) => {
   console.log(req.body); //  request body is being received correctly
   const id = req.body.id;
   const newStatus = req.body.newStatus;
-  console.log(id);
-  console.log(newStatus);
   try {
     await PlayersModel.findById(id, (err, updateStatus) => {
       updateStatus.status = newStatus;
@@ -128,14 +126,13 @@ app.put("/updateRecord", async (req, res) => {
 
   try {
     await PlayersModel.findById(id, (err, updateRecord) => {
-      const totalWins = wins.reduce((acc, curr) => acc + curr, 0);
-      updateRecord.win = updateRecord.win + totalWins;
+      updateRecord.win = win;
+      updateRecord.loss = loss;
       updateRecord.save();
       res.send("Record updated");
     });
   } catch (err) {
     console.log(err);
-    res.status(500).send("Internal server error");
   }
 });
 
